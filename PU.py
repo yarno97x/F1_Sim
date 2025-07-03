@@ -16,3 +16,5 @@ class PU :
         self.constructor = constructor
         self.top_speed = 340 # km/h
 
+    def __repr__(self) :
+        return "[PU]"

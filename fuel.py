@@ -9,7 +9,7 @@ class FuelTank :
         self.fuel = max(self.total - track_part_baseline * abs(random.gauss(mu=1, sigma=1)), 0)
 
     def __repr__(self) :
-        return f"Fuel Tank [{self.fuel / self.capacity * 100:.1f}%]"
+        return f"FT [{self.fuel / self.capacity * 100:.1f}%]"
     
 
 
