@@ -17,3 +17,26 @@ class F1Team(Enum):
 
     def secondary(self):
         return self.value[1]
+    
+F1Drivers = {
+    "Carlos Sainz": 55,
+    "Alexander Albon": 23,
+    "George Russell": 63,
+    "Kimi Antonelli": 12,
+    "Lewis Hamilton": 44,
+    "Charles Leclerc": 16,
+    "Oscar Piastri": 81,
+    "Lando Norris": 4,
+    "Max Verstappen": 1,
+    "Yuki Tsunoda": 22,
+    "Liam Lawson": 30,
+    "Isack Hadjar": 6,
+    "Esteban Ocon": 31,
+    "Oliver Bearman": 87,
+    "Lance Stroll": 18,
+    "Fernando Alonso": 14,
+    "Nico Hulkenberg": 27,
+    "Gabriel Bortoleto": 5,
+    "Pierre Gasly": 10,
+    "Franco Colapinto": 43
+}
