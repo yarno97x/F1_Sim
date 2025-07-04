@@ -1,12 +1,6 @@
-from PySide6.QtWidgets import QPushButton, QVBoxLayout, QWidget
-from enum import Enum
+from PySide6.QtWidgets import QPushButton, QApplication, QMainWindow
 from PySide6.QtGui import QFont
-
-class IndicatorType(Enum) :
-    DRS = {"text" : "DRS", "color" : "#00B050"}
-    OUT = {"text" : "OUT", "color" : "#4E95D9"}
-    PIT = {"text" : "PIT", "color" : "#FF0000"}
-
+from enums import IndicatorType
 
 class Indicator(QPushButton) :
     def __init__(self, indicator_type) :
@@ -44,3 +38,11 @@ class Indicator(QPushButton) :
                 color: {text_color}
             }}
         """)
+
+if __name__ == "__main__" :
+    app = QApplication()
+    window = QMainWindow()
+
+    window.setCentralWidget(Indicator(IndicatorType.DRS))
+    window.show()
+    app.exec()
