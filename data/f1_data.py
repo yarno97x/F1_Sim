@@ -1,4 +1,5 @@
 from enum import Enum
+import numpy as np
 
 class F1Team(Enum):
     MERCEDES       = (0x00D2BE, 0x000000)  # Teal & Black
@@ -18,96 +19,60 @@ class F1Team(Enum):
     def secondary(self):
         return self.value[1]
     
-F1DriverNumberTeam = {
-    "Carlos Sainz":        {"number": 55, "team": F1Team.WILLIAMS},
-    "Alex Albon":     {"number": 23, "team": F1Team.WILLIAMS},
-    "George Russell":      {"number": 63, "team": F1Team.MERCEDES},
-    "Kimi Antonelli":      {"number": 12, "team": F1Team.MERCEDES},
-    "Lewis Hamilton":      {"number": 44, "team": F1Team.FERRARI},
-    "Charles Leclerc":     {"number": 16, "team": F1Team.FERRARI},
-    "Oscar Piastri":       {"number": 81, "team": F1Team.MCLAREN},
-    "Lando Norris":        {"number": 4,  "team": F1Team.MCLAREN},
-    "Max Verstappen":      {"number": 1,  "team": F1Team.RED_BULL},
-    "Yuki Tsunoda":        {"number": 22, "team": F1Team.RED_BULL},
-    "Liam Lawson":         {"number": 30, "team": F1Team.RB},
-    "Isack Hadjar":        {"number": 6,  "team": F1Team.RB},
-    "Esteban Ocon":        {"number": 31, "team": F1Team.HAAS},
-    "Oliver Bearman":      {"number": 87, "team": F1Team.HAAS},
-    "Lance Stroll":        {"number": 18, "team": F1Team.ASTON_MARTIN},
-    "Fernando Alonso":     {"number": 14, "team": F1Team.ASTON_MARTIN},
-    "Nico Hulkenberg":     {"number": 27, "team": F1Team.KICK_SAUBER},
-    "Gabriel Bortoleto":   {"number": 5,  "team": F1Team.KICK_SAUBER},
-    "Pierre Gasly":        {"number": 10, "team": F1Team.ALPINE},
-    "Franco Colapinto":    {"number": 43, "team": F1Team.ALPINE},
+F1DriverInfo = {
+    "Carlos Sainz":      {"number": 55, "team": F1Team.WILLIAMS,     "color": "#005AFF"},
+    "Alex Albon":        {"number": 23, "team": F1Team.WILLIAMS,     "color": "#005AFF"},
+    "George Russell":    {"number": 63, "team": F1Team.MERCEDES,     "color": "#00D2BE"},
+    "Kimi Antonelli":    {"number": 12, "team": F1Team.MERCEDES,     "color": "#00D2BE"},
+    "Lewis Hamilton":    {"number": 44, "team": F1Team.FERRARI,      "color": "#DC0000"},
+    "Charles Leclerc":   {"number": 16, "team": F1Team.FERRARI,      "color": "#DC0000"},
+    "Oscar Piastri":     {"number": 81, "team": F1Team.MCLAREN,      "color": "#FF8700"},
+    "Lando Norris":      {"number": 4,  "team": F1Team.MCLAREN,      "color": "#FF8700"},
+    "Max Verstappen":    {"number": 1,  "team": F1Team.RED_BULL,     "color": "#1E41FF"},
+    "Yuki Tsunoda":      {"number": 22, "team": F1Team.RED_BULL,     "color": "#1E41FF"},
+    "Liam Lawson":       {"number": 30, "team": F1Team.RB,           "color": "#6692FF"},
+    "Isack Hadjar":      {"number": 6,  "team": F1Team.RB,           "color": "#6692FF"},
+    "Esteban Ocon":      {"number": 31, "team": F1Team.HAAS,         "color": "#B6BABD"},
+    "Oliver Bearman":    {"number": 87, "team": F1Team.HAAS,         "color": "#B6BABD"},
+    "Lance Stroll":      {"number": 18, "team": F1Team.ASTON_MARTIN, "color": "#006F62"},
+    "Fernando Alonso":   {"number": 14, "team": F1Team.ASTON_MARTIN, "color": "#006F62"},
+    "Nico Hulkenberg":   {"number": 27, "team": F1Team.KICK_SAUBER,  "color": "#66994D"},
+    "Gabriel Bortoleto": {"number": 5,  "team": F1Team.KICK_SAUBER,  "color": "#66994D"},
+    "Pierre Gasly":      {"number": 10, "team": F1Team.ALPINE,       "color": "#0090FF"},
+    "Franco Colapinto":  {"number": 43, "team": F1Team.ALPINE,       "color": "#0090FF"},
 }
 
-import numpy as np
+F1TrackInfo = {
+    "MELBOURNE":   {"name": "MELBOURNE", "color": "#00008B", "country": "Australia"},
+    "SHANGHAI":    {"name": "SHANGHAI", "color": "#FF0000", "country": "China"},
+    "SUZUKA":      {"name": "SUZUKA", "color": "#BC002D", "country": "Japan"},
+    "SAKHIR":      {"name": "SAKHIR", "color": "#D71A28", "country": "Bahrain"},
+    "JEDDAH":      {"name": "JEDDAH", "color": "#006C35", "country": "Saudi Arabia"},
 
-class IndicatorType(Enum) :
-    DRS = {"text" : "DRS", "color" : "#00B050"}
-    OUT = {"text" : "OUT", "color" : "#4E95D9"}
-    PIT = {"text" : "PIT", "color" : "#FF0000"}
+    "MIAMI":       {"name": "MIAMI", "color": "#3C3B6E", "country": "United States"},
+    "IMOLA":       {"name": "IMOLA", "color": "#008C45", "country": "Italy"},
+    "MONACO":      {"name": "MONACO", "color": "#ED1C24", "country": "Monaco"},
+    "BARCELONA":   {"name": "BARCELONA", "color": "#AA151B", "country": "Spain"},
+    "MONTREAL":    {"name": "MONTREAL", "color": "#FF0000", "country": "Canada"},
 
-class F1DriverColor(Enum):
-    VERSTAPPEN = {"name": "Max Verstappen", "color": "#1E41FF"}       # Red Bull
-    TSUNODA = {"name": "Yuki Tsunoda", "color": "#1E41FF"}            # Red Bull
+    "SPIELBERG":   {"name": "SPIELBERG", "color": "#ED2939", "country": "Austria"},
+    "SILVERSTONE": {"name": "SILVERSTONE", "color": "#00247D", "country": "United Kingdom"},
+    "SPA":         {"name": "SPA", "color": "#D3020D", "country": "Belgium"},
+    "BUDAPEST":    {"name": "BUDAPEST", "color": "#436F4D", "country": "Hungary"},
+    "ZANDVOORT":   {"name": "ZANDVOORT", "color": "#21468B", "country": "Netherlands"},
 
-    LECLERC = {"name": "Charles Leclerc", "color": "#DC0000"}         # Ferrari
-    HAMILTON = {"name": "Lewis Hamilton", "color": "#DC0000"}         # Ferrari
+    "MONZA":       {"name": "MONZA", "color": "#CD212A", "country": "Italy"},
+    "BAKU":        {"name": "BAKU", "color": "#0098C3", "country": "Azerbaijan"},
+    "SINGAPORE":   {"name": "SINGAPORE", "color": "#EF3340", "country": "Singapore"},
+    "AUSTIN":      {"name": "AUSTIN", "color": "#B22234", "country": "United States"},
+    "MEXICO CITY": {"name": "MEXICO CITY", "color": "#006341", "country": "Mexico"},
 
-    RUSSELL = {"name": "George Russell", "color": "#00D2BE"}          # Mercedes
-    ANTONELLI = {"name": "Kimi Antonelli", "color": "#00D2BE"}        # Mercedes
+    "SAO PAULO":   {"name": "SAO PAULO", "color": "#009C3B", "country": "Brazil"},
+    "LAS VEGAS":   {"name": "LAS VEGAS", "color": "#3C3B6E", "country": "United States"},
+    "LUSAIL":      {"name": "LUSAIL", "color": "#8A1538", "country": "Qatar"},
+    "YAS MARINA":  {"name": "YAS MARINA", "color": "#000000", "country": "United Arab Emirates"},
+}
 
-    NORRIS = {"name": "Lando Norris", "color": "#FF8700"}             # McLaren
-    PIASTRI = {"name": "Oscar Piastri", "color": "#FF8700"}           # McLaren
-
-    ALONSO = {"name": "Fernando Alonso", "color": "#006F62"}          # Aston Martin
-    STROLL = {"name": "Lance Stroll", "color": "#006F62"}             # Aston Martin
-
-    LAWSON = {"name": "Liam Lawson", "color": "#6692FF"}              # VCARB
-    HADJAR = {"name": "Isack Hadjar", "color": "#6692FF"}             # VCARB
-
-    HULKENBERG = {"name": "Nico Hulkenberg", "color": "#66994D"}      # Kick Sauber
-    BORTOLETO = {"name": "Gabriel Bortoleto", "color": "#66994D"}     # Kick Sauber
-
-    OCON = {"name": "Esteban Ocon", "color": "#B6BABD"}               # Haas
-    BEARMAN = {"name": "Oliver Bearman", "color": "#B6BABD"}          # Haas
-
-    SAINZ = {"name": "Carlos Sainz", "color": "#005AFF"}              # Williams
-    ALBON = {"name": "Alex Albon", "color": "#005AFF"}                # Williams
-
-    GASLY = {"name": "Pierre Gasly", "color": "#0090FF"}              # Alpine (?)
-    COLAPINTO = {"name": "Franco Colapinto", "color": "#0090FF"}      # Alpine (?)
-
-class F1Track(Enum):
-    MELBOURNE = {"name": "MELBOURNE", "color": "#00008B"}       # Australia
-    SHANGHAI = {"name": "SHANGHAI", "color": "#FF0000"}         # China
-    SUZUKA = {"name": "SUZUKA", "color": "#BC002D"}             # Japan
-    SAKHIR = {"name": "SAKHIR", "color": "#D71A28"}             # Bahrain
-    JEDDAH = {"name": "JEDDAH", "color": "#006C35"}             # Saudi Arabia
-
-    MIAMI = {"name": "MIAMI", "color": "#3C3B6E"}               # USA
-    IMOLA = {"name": "IMOLA", "color": "#008C45"}               # Italy
-    MONACO = {"name": "MONACO", "color": "#ED1C24"}             # Monaco
-    BARCELONA = {"name": "BARCELONA", "color": "#AA151B"}       # Spain
-    MONTREAL = {"name": "MONTREAL", "color": "#FF0000"}         # Canada
-
-    SPIELBERG = {"name": "SPIELBERG", "color": "#ED2939"}       # Austria
-    SILVERSTONE = {"name": "SILVERSTONE", "color": "#00247D"}   # UK
-    SPA = {"name": "SPA", "color": "#D3020D"}                   # Belgium (updated for readability)
-    BUDAPEST = {"name": "BUDAPEST", "color": "#436F4D"}         # Hungary
-    ZANDVOORT = {"name": "ZANDVOORT", "color": "#21468B"}       # Netherlands
-
-    MONZA = {"name": "MONZA", "color": "#CD212A"}               # Italy
-    BAKU = {"name": "BAKU", "color": "#0098C3"}                 # Azerbaijan
-    SINGAPORE = {"name": "SINGAPORE", "color": "#EF3340"}       # Singapore
-    AUSTIN = {"name": "AUSTIN", "color": "#B22234"}             # USA
-    MEXICO_CITY = {"name": "MEXICO CITY", "color": "#006341"}   # Mexico
-
-    SAO_PAULO = {"name": "SAO PAULO", "color": "#009C3B"}       # Brazil
-    LAS_VEGAS = {"name": "LAS VEGAS", "color": "#3C3B6E"}       # USA
-    LUSAIL = {"name": "LUSAIL", "color": "#8A1538"}             # Qatar
-    YAS_MARINA = {"name": "YAS MARINA", "color": "#000000"}     # Abu Dhabi
-
-drivers = np.array(list(F1DriverColor)).reshape(-1, 4)
-tracks = np.array(list(F1Track)).reshape(-1, 4)
+drivers = np.array([(i, F1DriverInfo[i]["color"]) for i in F1DriverInfo.keys()]).reshape(-1, 4, 2)
+tracks = np.array([(i, F1TrackInfo[i]["color"]) for i in F1TrackInfo.keys()]).reshape(-1, 4, 2)
+# print(tracks)
