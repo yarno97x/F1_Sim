@@ -76,11 +76,11 @@ class ButtonGrid(QWidget) :
             horizontal.addLayout(vertical)
         self.setLayout(horizontal)
                 
-if __name__ == "__main__" :
-    app = QApplication()
-    window = Window(app)
-    c = Controller()
+# if __name__ == "__main__" :
+#     app = QApplication()
+#     window = Window(app)
+#     c = Controller()
 
-    window.setCentralWidget(ButtonGrid("drivers", c, switch))
-    window.show()
-    app.exec()
+#     window.setCentralWidget(ButtonGrid("drivers", c, switch))
+#     window.show()
+#     app.exec()
