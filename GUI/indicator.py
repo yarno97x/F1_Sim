@@ -1,6 +1,12 @@
-from PySide6.QtWidgets import QPushButton, QApplication, QMainWindow
+from PySide6.QtWidgets import QPushButton, QApplication, QWidget, QHBoxLayout, QVBoxLayout
 from PySide6.QtGui import QFont
-from enums import IndicatorType
+from window import Window
+from enum import Enum
+
+class IndicatorType(Enum) :
+    DRS = {"text" : "DRS", "color" : "#00B050"}
+    OUT = {"text" : "OUT", "color" : "#4E95D9"}
+    PIT = {"text" : "PIT", "color" : "#FF0000"}
 
 class Indicator(QPushButton) :
     def __init__(self, indicator_type) :
@@ -39,10 +45,32 @@ class Indicator(QPushButton) :
             }}
         """)
 
+class Indicators(QWidget) :
+    def __init__(self, orientation = "horizontal") :
+        super().__init__()
+        if orientation == "horizontal" :
+            self.layout = QHBoxLayout()
+        else :
+            self.layout = QVBoxLayout()
+        
+        for indicator in list(IndicatorType) :
+            self.layout.addWidget(Indicator(indicator))
+        self.setLayout(self.layout)
+        
+        if orientation == "horizontal" :
+            self.setFixedSize(200, 150)
+        else :
+            self.setFixedSize(150, 200)
+        self.setMinimumSize(150, 100)
+        self.setMaximumSize(400, 300)
+        self.setStyleSheet("border: 10px solid white;")
+
+
+
 if __name__ == "__main__" :
     app = QApplication()
-    window = QMainWindow()
-
-    window.setCentralWidget(Indicator(IndicatorType.DRS))
+    window = Window(app)
+    i = Indicators()
+    window.setCentralWidget(i)
     window.show()
     app.exec()
