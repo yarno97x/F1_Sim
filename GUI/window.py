@@ -1,5 +1,7 @@
 from PySide6.QtWidgets import QApplication, QMainWindow, QStackedWidget
 from buttonGrid import ButtonGrid
+from start import StartPage
+from weather_choice import WeatherPage
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../controller')))
 from controller import Controller
@@ -27,11 +29,15 @@ class Window(QMainWindow) :
 
         self.stack = QStackedWidget()
 
-        self.choose_driver = ButtonGrid("drivers", c, lambda: self.stack.setCurrentIndex(1))
-        self.choose_track = ButtonGrid("tracks", c, lambda: self.stack.setCurrentIndex(0))
+        self.start = StartPage(lambda: self.stack.setCurrentIndex(1))
+        self.choose_driver = ButtonGrid("drivers", c, lambda: self.stack.setCurrentIndex(2))
+        self.choose_track = ButtonGrid("tracks", c, lambda: self.stack.setCurrentIndex(3))
+        self.choose_weather = WeatherPage(c, lambda: self.stack.setCurrentIndex(0))
 
+        self.stack.addWidget(self.start)
         self.stack.addWidget(self.choose_driver)
         self.stack.addWidget(self.choose_track)
+        self.stack.addWidget(self.choose_weather)
         
         self.setCentralWidget(self.stack)
 
@@ -47,11 +53,15 @@ class Window(QMainWindow) :
             """)
         menu = self.menuBar()
         menu.setStyleSheet(f"background-color: {ends}; border: 1px solid white")
+        
         options = menu.addMenu("&Options")
         themes = menu.addMenu("&Themes")
         for theme in modes.keys() :
             action = themes.addAction(f"{theme}")
             action.triggered.connect(lambda checked=False, t=theme: self.change_color(modes[t]))
+        
+        again = options.addAction("Start Over")
+        again.triggered.connect(self.start_again)
         quit = options.addAction("Quit")
         quit.triggered.connect(self.quit_app)
 
@@ -70,10 +80,13 @@ class Window(QMainWindow) :
 
     def quit_app(self) :
         self.app.quit()
+
+    def start_again(self) :
+        self.stack.setCurrentIndex(0)
         
 if __name__ == "__main__" :
     app = QApplication()
     c = Controller()
     window = Window(app, c)
-    window.show()
+    window.showFullScreen()
     app.exec()
