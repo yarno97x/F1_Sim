@@ -1,5 +1,6 @@
 import numpy as np
 from numpy.linalg import norm 
+from mock_track import mock_track_parts
 
 class Circuit :
     def __init__(self, track = []):
@@ -20,18 +21,18 @@ class TrackPart :
     def __init__(self, entry = None, apex = None, end = None) :
         if not all([(type(x) == np.ndarray and x.shape == (2,)) for x in [entry, apex, end]]) :
             raise TypeError("Points should be 2D Numpy arrays")
-        elif norm(entry - apex) < 0.01 and norm(entry - end) < 0.01 :
-            raise ValueError("This is a single point")
+        elif norm(entry - apex) < 0.01 or norm(entry - end) < 0.01 or norm(apex - end) < 0.01:
+            raise ValueError("This is a straight line")
 
-        self.entry = entry
-        self.apex = apex
-        self.end = end
-        self.straight = self.is_straight()
-
-    def is_straight(self) :
-        a = norm(self.entry - self.end)
-        b = norm(self.entry - self.apex)
-        c = norm(self.apex - self.end)
-        s = (a + b + c) / 2
-        return (s * (s - a) * (s - b) * (s - c)) ** (1/2) < (a / 100) 
+        self.A = entry
+        self.B = apex
+        self.C = end
+        self.angle = self.get_angle()
+    
+    def get_angle(self) :
+        BA = self.B - self.A
+        BC = self.B - self.C
+        return round(np.acos((np.dot(BA, BC))/(norm(BA) * norm(BC))) * 360 / np.pi / 2, 0) % 180
+    
+# c = Circuit(mock_track_parts)
         

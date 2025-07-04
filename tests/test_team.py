@@ -1,7 +1,7 @@
 import sys
 import os
 import pytest, random
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../model')))
 from driver import Driver
 from f1_data import F1Team
 from team import Team
