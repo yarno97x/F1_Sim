@@ -18,25 +18,26 @@ class F1Team(Enum):
     def secondary(self):
         return self.value[1]
     
-F1Drivers = {
-    "Carlos Sainz": 55,
-    "Alexander Albon": 23,
-    "George Russell": 63,
-    "Kimi Antonelli": 12,
-    "Lewis Hamilton": 44,
-    "Charles Leclerc": 16,
-    "Oscar Piastri": 81,
-    "Lando Norris": 4,
-    "Max Verstappen": 1,
-    "Yuki Tsunoda": 22,
-    "Liam Lawson": 30,
-    "Isack Hadjar": 6,
-    "Esteban Ocon": 31,
-    "Oliver Bearman": 87,
-    "Lance Stroll": 18,
-    "Fernando Alonso": 14,
-    "Nico Hulkenberg": 27,
-    "Gabriel Bortoleto": 5,
-    "Pierre Gasly": 10,
-    "Franco Colapinto": 43
+F1Driver = {
+    "Carlos Sainz":        {"number": 55, "team": F1Team.WILLIAMS},
+    "Alex Albon":     {"number": 23, "team": F1Team.WILLIAMS},
+    "George Russell":      {"number": 63, "team": F1Team.MERCEDES},
+    "Kimi Antonelli":      {"number": 12, "team": F1Team.MERCEDES},
+    "Lewis Hamilton":      {"number": 44, "team": F1Team.FERRARI},
+    "Charles Leclerc":     {"number": 16, "team": F1Team.FERRARI},
+    "Oscar Piastri":       {"number": 81, "team": F1Team.MCLAREN},
+    "Lando Norris":        {"number": 4,  "team": F1Team.MCLAREN},
+    "Max Verstappen":      {"number": 1,  "team": F1Team.RED_BULL},
+    "Yuki Tsunoda":        {"number": 22, "team": F1Team.RED_BULL},
+    "Liam Lawson":         {"number": 30, "team": F1Team.RB},
+    "Isack Hadjar":        {"number": 6,  "team": F1Team.RB},
+    "Esteban Ocon":        {"number": 31, "team": F1Team.HAAS},
+    "Oliver Bearman":      {"number": 87, "team": F1Team.HAAS},
+    "Lance Stroll":        {"number": 18, "team": F1Team.ASTON_MARTIN},
+    "Fernando Alonso":     {"number": 14, "team": F1Team.ASTON_MARTIN},
+    "Nico Hulkenberg":     {"number": 27, "team": F1Team.KICK_SAUBER},
+    "Gabriel Bortoleto":   {"number": 5,  "team": F1Team.KICK_SAUBER},
+    "Pierre Gasly":        {"number": 10, "team": F1Team.ALPINE},
+    "Franco Colapinto":    {"number": 43, "team": F1Team.ALPINE},
 }
+
