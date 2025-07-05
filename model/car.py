@@ -1,4 +1,4 @@
-from PU import *
+from PU import PU
 from tire import *
 from fuel import FuelTank
 

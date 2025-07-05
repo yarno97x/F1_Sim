@@ -1,5 +1,6 @@
 from driver import *
-from f1_data import F1Team
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data')))
+from data import F1Team
 
 class Team :
     def __init__(self, name = None):

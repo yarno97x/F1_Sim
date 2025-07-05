@@ -1,6 +1,5 @@
 import numpy as np
 from numpy.linalg import norm 
-from mock_track import mock_track_parts
 
 class Circuit :
     def __init__(self, track = []):
@@ -33,6 +32,5 @@ class TrackPart :
         BA = self.B - self.A
         BC = self.B - self.C
         return round(np.acos((np.dot(BA, BC))/(norm(BA) * norm(BC))) * 360 / np.pi / 2, 0) % 180
-    
-# c = Circuit(mock_track_parts)
+
         
