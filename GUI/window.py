@@ -1,9 +1,6 @@
 from PySide6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QSizePolicy
 from components.buttonGrid import ButtonGrid
 from pages.start import StartPage
-from pages.weather_choice import WeatherPage
-# from components.indicator import Indicators
-# from pages.simulator import Simulation_Page
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../controller')))
 from controller import Controller
@@ -39,14 +36,10 @@ class Window(QMainWindow) :
         self.start = StartPage(lambda: self.stack.setCurrentIndex(1))
         self.choose_driver = ButtonGrid("drivers", c, lambda: self.stack.setCurrentIndex(2))
         self.choose_track = ButtonGrid("tracks", c, lambda: self.stack.setCurrentIndex(0))
-        # self.choose_weather = WeatherPage(lambda: self.stack.setCurrentIndex(0))
-        # self.simulator = Simulation_Page(c)
 
         self.stack.addWidget(self.start)
         self.stack.addWidget(self.choose_driver)
         self.stack.addWidget(self.choose_track)
-        # self.stack.addWidget(self.choose_weather)
-        # self.stack.addWidget(self.simulator)
         
         self.setCentralWidget(self.stack)
 
