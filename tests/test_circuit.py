@@ -1,10 +1,11 @@
 import pytest
 import sys
 import os
+import numpy as np
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../model')))
 
-from circuit import *
-from mock_track import *
+from circuit import Circuit, TrackPart
+from mock_track import mock_track_parts, mock_track_parts_open
 
 def test_new_trackPart_type_check_error() :
     with pytest.raises(TypeError) :

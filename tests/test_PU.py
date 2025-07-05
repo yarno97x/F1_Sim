@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../model')))
 
-from PU import *
+from PU import PU, PU_constructors
 
 def test_PU_in_constructors() :
     assert isinstance(PU(PU_constructors.MERCEDES).constructor, PU_constructors)

@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../m
 from PU import PU, PU_constructors
 from tire import *
 from fuel import FuelTank
-from car import *
+from car import Car
 
 @pytest.fixture
 def power_unit() :
