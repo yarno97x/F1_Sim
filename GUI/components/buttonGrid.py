@@ -1,17 +1,11 @@
 # PySide Imports
-from PySide6.QtWidgets import QPushButton, QApplication, QWidget, QVBoxLayout, QHBoxLayout
+from PySide6.QtWidgets import QPushButton, QWidget, QVBoxLayout, QHBoxLayout
 from PySide6.QtGui import QFont
-
-# GUI Imports
-# from window import Window
 
 # Imports outside folder
 import sys, os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../controller')))
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../model')))
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../data')))
-from controller import Controller
-from f1_data import drivers, tracks, F1DriverInfo
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data')))
+from data import drivers, tracks, F1DriverInfo, F1TrackInfo
 
 class ButtonCard(QPushButton) :
     def __init__(self, name, color, controller, switch) :
@@ -22,12 +16,13 @@ class ButtonCard(QPushButton) :
             self.kind = "driver"
         else :
             self.kind = "track"
-
+            name = name + "\n" + F1TrackInfo[name]["country"]
         self.name, self.color = name, color
         super().__init__(text=self.name)
         font = QFont("Eras Bold ITC", 14)
         self.setFont(font)
-        self.setFixedSize(200, 100)
+        self.setMinimumSize(200, 100)
+        self.setMaximumSize(400, 150)
 
         self.setStyleSheet(f"""
             QPushButton {{
@@ -42,6 +37,16 @@ class ButtonCard(QPushButton) :
             QPushButton:hover {{
                 background-color: blue;
                 color: white;
+                font-weight: bold;
+                border-radius: 5px;
+                margin: 10px;
+                border: 1px solid white;
+                padding: 5px;
+            }}
+
+            QPushButton:pressed {{
+                background-color: white;
+                color: black;
                 font-weight: bold;
                 border-radius: 5px;
                 margin: 10px;
@@ -76,11 +81,3 @@ class ButtonGrid(QWidget) :
             horizontal.addLayout(vertical)
         self.setLayout(horizontal)
                 
-# if __name__ == "__main__" :
-#     app = QApplication()
-#     window = Window(app)
-#     c = Controller()
-
-#     window.setCentralWidget(ButtonGrid("drivers", c, switch))
-#     window.show()
-#     app.exec()

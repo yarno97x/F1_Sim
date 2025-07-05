@@ -1,6 +1,5 @@
-from PySide6.QtWidgets import QPushButton, QApplication, QWidget, QHBoxLayout, QVBoxLayout
+from PySide6.QtWidgets import QPushButton, QWidget, QHBoxLayout, QVBoxLayout
 from PySide6.QtGui import QFont
-from window import Window
 from enum import Enum
 
 class IndicatorType(Enum) :
@@ -65,12 +64,3 @@ class Indicators(QWidget) :
         self.setMaximumSize(400, 300)
         self.setStyleSheet("border: 10px solid white;")
 
-
-
-if __name__ == "__main__" :
-    app = QApplication()
-    window = Window(app)
-    i = Indicators()
-    window.setCentralWidget(i)
-    window.show()
-    app.exec()
