@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QPushButton, QApplication, QWidget, QLabel, QMainWindow, QVBoxLayout
+from PySide6.QtWidgets import QPushButton, QApplication, QWidget, QLabel, QMainWindow, QVBoxLayout, QSizePolicy
 from PySide6.QtGui import QFont
 from PySide6.QtCore import Qt
 
@@ -11,8 +11,8 @@ class StartPage(QWidget) :
         layout = QVBoxLayout()
 
         title = QLabel("F1 TELEMETRY SIMULATOR\n+\nPIT STRATEGY")
-        font = QFont("Eras Bold ITC", 14)
-        title.setStyleSheet("color: white")
+        font = QFont("Eras Bold ITC", 16)
+        title.setStyleSheet("color: white; background-color: black; border: 3px solid white")
 
         title.setMinimumSize(300, 100)
         title.setMaximumSize(500, 100)
@@ -23,12 +23,14 @@ class StartPage(QWidget) :
         button.setMinimumSize(100, 50)
         button.setMaximumSize(200, 50)
         button.setFont(font)
+        button.setStyleSheet("border: 3px solid white")
+        title.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         
         layout.addWidget(title, alignment=Qt.AlignCenter)
         layout.addWidget(button, alignment=Qt.AlignCenter)
 
-        layout.setSpacing(1)
-        layout.setContentsMargins(100, 100, 100, 100)
+        layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
         self.setLayout(layout)
 
         button.clicked.connect(self.start)
