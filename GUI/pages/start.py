@@ -6,7 +6,6 @@ class StartPage(QWidget) :
     def __init__(self, switch) :
         super().__init__()
         self.switch = switch
-        # self.setStyleSheet("border: 5px solid white")
 
         layout = QVBoxLayout()
 

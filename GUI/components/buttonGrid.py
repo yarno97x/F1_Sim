@@ -12,13 +12,14 @@ class ButtonCard(QPushButton) :
         self.c = controller
         self.switch = switch
 
+        self.name, self.color = name, color
         if name in F1DriverInfo.keys() :
             self.kind = "driver"
+            name = name + "\n" + F1DriverInfo[name]["team"].name
         else :
             self.kind = "track"
             name = name + "\n" + F1TrackInfo[name]["country"]
-        self.name, self.color = name, color
-        super().__init__(text=self.name)
+        super().__init__(name.replace("_", " "))
         font = QFont("Eras Bold ITC", 14)
         self.setFont(font)
         self.setMinimumSize(200, 100)
