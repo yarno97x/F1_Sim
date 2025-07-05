@@ -1,10 +1,10 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../model')))
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../data')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data')))
 from driver import Driver
 from team import Team
-from f1_data import F1DriverInfo
+from data import F1DriverInfo
 
 class Controller :
     def __init__(self):
@@ -18,4 +18,4 @@ class Controller :
 
     def choose_track(self, track) :
         self.track = track
-        print(f"Track -> {self.track}")
+        print(f"Track -> {self.track.replace("\n", ", ")}")
